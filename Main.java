@@ -136,6 +136,7 @@ class Main {
     // eliminating classes of indistinguishable states using Myhill-Nerode Theorem's tabulation method
     static void minimizeDFA(HashMap<Pair<Integer, Character>, Integer> transitions, char[] alphabet, HashSet<Integer> states, HashSet<Integer> accept) {
         Integer[] s = states.toArray(new Integer[0]);
+	Arrays.sort(s);
         HashMap<Pair<Integer, Integer>, String> dist = new HashMap<>();
         // Determines whether state pairs are distinguishable based on whether they're an accept state or not
         for (int i = 0; i < s.length - 1; i++) {
@@ -163,7 +164,8 @@ class Main {
                     for (char c: alphabet) {
                         Integer transA = transitions.get(Pair.of(s[i], c));
                         Integer transB = transitions.get(Pair.of(s[j], c));
-                        Pair<Integer, Integer> pair = (dist.containsKey(Pair.of(transA, transB))? Pair.of(transA, transB): Pair.of(transB, transA));
+			if (transA == transB) continue;
+                        Pair<Integer, Integer> pair = (transA < transB ? Pair.of(transA, transB): Pair.of(transB, transA));
                         if (dist.get(pair).equals("distinguishable")) {
                             dist.replace(Pair.of(s[i], s[j]), "distinguishable");
                             count++;
