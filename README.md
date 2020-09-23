@@ -57,10 +57,10 @@ accepted or rejected. An example session is as follows:
     is to input "exit" in order to stop.
 
 ## HOW TO COMPILE
-javac Main.java
+`javac Main.java`
 
 ## HOW TO RUN
-java Main
+`java Main`
 
 No command line arguments are needed.  All input is taken from standard input.
 
